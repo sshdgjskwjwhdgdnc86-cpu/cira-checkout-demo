@@ -1,0 +1,77 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Checkout - CIRA</title><link rel="stylesheet" href="./style.css"></head><body>
+<main class="co">
+<section class="pp">
+  <img class="main" id="pimg" alt="Cira Antifungal Cream">
+  <h1 id="ptitle"></h1><p class="sub" id="psub"></p>
+  <div class="bl">Choose your bundle</div><div id="bundles"></div>
+  <div class="assure"><b>30-day money-back guarantee.</b> If it is not for you, email us within 30 days of delivery for a full refund. <a href="./refund-policy">Refund policy</a><br><br><b>Free US shipping.</b> Ships in 1-2 business days with tracking.</div>
+</section>
+<section class="form">
+  <form id="f">
+  <h2>Contact</h2>
+  <label>Email</label><input name="email" type="email" required autocomplete="email">
+  <label>Phone (optional, for delivery updates)</label><input name="phone" type="tel" autocomplete="tel">
+  <h2>Shipping address</h2>
+  <div class="row"><div><label>First name</label><input name="firstName" required autocomplete="given-name"></div><div><label>Last name</label><input name="lastName" required autocomplete="family-name"></div></div>
+  <label>Address</label><input name="line1" required autocomplete="address-line1">
+  <label>Apartment, suite (optional)</label><input name="line2" autocomplete="address-line2">
+  <div class="row3"><div><label>City</label><input name="city" required></div><div><label>State</label><input name="state" required maxlength="2" placeholder="TX"></div><div><label>ZIP</label><input name="postal_code" required inputmode="numeric"></div></div>
+  <h2>Payment</h2><p class="muted" style="font-size:12px;margin:-4px 0 10px">All transactions are secure and encrypted.</p>
+  <div id="payment"></div>
+  <h2>Order summary</h2>
+  <div class="sum"><span id="sline"></span><span id="sprice"></span></div>
+  <div class="sum"><span>Shipping</span><span>Free</span></div>
+  <div class="sum tot"><span>Total</span><span id="stotal"></span></div>
+  <button class="btn" id="pay" type="submit">Complete order</button>
+  <div class="err" id="err"></div>
+  <p class="fine">By placing your order you agree to our <a href="./terms">Terms</a> and <a href="./refund-policy">Refund policy</a>. Your card is stored securely by Stripe so you can add items on the next page with one click. Charges appear as CIRACOVE.</p>
+  </form>
+</section></main>
+<script src="./mock-api.js"></script><script src="./common.js"></script>
+<script>
+let cfg, sel, stripe, elements;
+(async () => {
+  cfg = await loadConfig(); const p = cfg.product;
+  $('#pimg').src = p.image; $('#ptitle').textContent = p.title; $('#psub').textContent = p.subtitle;
+  sel = cfg.bundles.find(b => b.popular) || cfg.bundles[0];
+  const render = () => {
+    $('#bundles').innerHTML = cfg.bundles.map(b => `<div class="bundle ${b.id===sel.id?'sel':''}" data-id="${b.id}">${b.popular?'<span class="tag">MOST POPULAR</span>':''}
+      <span class="r"></span><div class="t"><b>${b.label}</b>${b.compareAt?`<span class="save">SAVE ${money(b.compareAt-b.price)}</span>`:''}<div class="n">${b.note}</div></div>
+      <div class="p">${money(b.price)}${b.compareAt?`<s>${money(b.compareAt)}</s>`:''}</div></div>`).join('');
+    document.querySelectorAll('.bundle').forEach(el => el.onclick = () => { sel = cfg.bundles.find(b => b.id === el.dataset.id); render(); });
+    $('#sline').textContent = `${p.title} - ${sel.label}`; $('#sprice').textContent = money(sel.price); $('#stotal').textContent = money(sel.price);
+    if (elements) elements.update({ amount: sel.price });
+  };
+  render();
+  fbq('track', 'InitiateCheckout', { value: sel.price / 100, currency: 'USD', content_ids: [sel.variantId.split('/').pop()], content_type: 'product' });
+  if (cfg.mock) {
+    $('#payment').innerHTML = `<div class="mock"><b>Local test mock.</b> No Stripe test key is set, so the Stripe Payment Element (card, Apple Pay, Google Pay, Link) is replaced by this box. Add STRIPE_SECRET_KEY / STRIPE_PUBLISHABLE_KEY (sk_test_/pk_test_) to .env to render the real element.<br><br>
+      <label>Card number</label><input value="4242 4242 4242 4242" disabled><div class="row"><div><label>Expiry</label><input value="12 / 34" disabled></div><div><label>CVC</label><input value="123" disabled></div></div></div>`;
+  } else {
+    const s = document.createElement('script'); s.src = 'https://js.stripe.com/v3/'; document.head.appendChild(s); await new Promise(r => s.onload = r);
+    stripe = Stripe(cfg.publishableKey);
+    elements = stripe.elements({ mode: 'payment', amount: sel.price, currency: 'usd', setupFutureUsage: 'off_session', appearance: { theme: 'stripe', variables: { colorPrimary: '#2f5d4e' } } });
+    elements.create('payment', { layout: 'tabs', wallets: { applePay: 'auto', googlePay: 'auto' } }).mount('#payment');
+  }
+})();
+$('#f').onsubmit = async e => {
+  e.preventDefault(); $('#err').textContent = ''; $('#pay').disabled = true; $('#pay').textContent = 'Processing...';
+  const fd = Object.fromEntries(new FormData(e.target));
+  const customer = { email: fd.email, phone: fd.phone, firstName: fd.firstName, lastName: fd.lastName,
+    address: { line1: fd.line1, line2: fd.line2, city: fd.city, state: fd.state.toUpperCase(), postal_code: fd.postal_code, country: 'US' } };
+  try {
+    if (!cfg.mock) { const { error } = await elements.submit(); if (error) throw error; }
+    const r = await (await fetch('/api/checkout', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ bundleId: sel.id, customer, fbp: getCookie('_fbp'), fbc: fbcValue(), sourceUrl: location.href }) })).json();
+    if (r.error) throw new Error(r.error);
+    sessionStorage.setItem('cira_token', r.token);
+    if (!cfg.mock) {
+      const { error } = await stripe.confirmPayment({ elements, clientSecret: r.clientSecret, redirect: 'if_required',
+        confirmParams: { return_url: location.origin + '/upsell1?t=' + r.token } });
+      if (error) throw error;
+    }
+    await fetch('/api/checkout/confirmed', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ token: r.token }) });
+    location.href = './upsell1?t=' + r.token;
+  } catch (err) { $('#err').textContent = err.message || 'Payment failed. Please try again.'; $('#pay').disabled = false; $('#pay').textContent = 'Complete order'; }
+};
+</script></body></html>

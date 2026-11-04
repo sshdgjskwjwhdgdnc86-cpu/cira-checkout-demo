@@ -1,0 +1,53 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Order confirmed - CIRA</title><link rel="stylesheet" href="./style.css">
+<style>.ty{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr;gap:0}@media(min-width:900px){.ty{grid-template-columns:1.1fr .9fr;gap:48px;padding:32px 16px}}
+.l{padding:20px 16px}.r{background:var(--bg);padding:20px 16px;border-top:1px solid var(--line)}@media(min-width:900px){.r{border:1px solid var(--line);padding:24px;align-self:start}}
+.hd{display:flex;gap:14px;align-items:center;margin-bottom:20px}.ck{flex:none;width:46px;height:46px;border-radius:50%;border:2px solid var(--green);display:flex;align-items:center;justify-content:center}
+.hd small{display:block;color:var(--muted);font-size:13px}.hd h1{margin:0;font-size:24px;line-height:1.15}
+.box{border:1px solid var(--line);padding:16px;margin-bottom:14px}.box h2{font-size:15px;margin:0 0 8px}.box p{margin:0 0 6px;font-size:14px}
+.steps{list-style:none;margin:10px 0 0;padding:0;font-size:14px}.steps li{display:flex;gap:10px;padding:6px 0}.steps .d{flex:none;width:9px;height:9px;border-radius:50%;background:#c9cec6;margin-top:6px}.steps li.on .d{background:var(--green)}
+.steps b{display:block}.steps span{color:var(--muted);font-size:13px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:14px}.grid2 h3{font-size:12px;color:var(--muted);font-weight:400;margin:0 0 3px}
+.it{display:flex;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}.it .th{position:relative;flex:none;width:58px;height:58px;border:1px solid var(--line);background:#fff;border-radius:5px}
+.it .th img{width:100%;height:100%;object-fit:cover;border-radius:5px}.it .th i{position:absolute;top:-7px;right:-7px;background:#6b716d;color:#fff;font-style:normal;font-size:11px;border-radius:10px;min-width:19px;height:19px;display:flex;align-items:center;justify-content:center;padding:0 5px}
+.it .n{flex:1;font-size:14px}.it .p{font-size:14px;font-weight:600}.ref{font-family:ui-monospace,Menlo,monospace;font-size:12px}
+.cta{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:6px;font-size:14px}.cta .btn{width:auto;padding:14px 22px;margin:0}</style></head><body data-noann="1">
+<main class="ty">
+<section class="l">
+  <div class="hd"><div class="ck"><svg width="22" height="22" viewBox="0 0 20 20"><path d="M4 10.5l4 4 8-9" stroke="#253d31" stroke-width="2.2" fill="none"/></svg></div>
+    <div><small id="refline">Order confirmed</small><h1 id="greet">Thank you for your order</h1></div></div>
+  <div class="box"><h2>Your order is confirmed</h2><p id="emailline">A confirmation email is on its way.</p>
+    <ul class="steps"><li class="on"><i class="d"></i><div><b>Confirmed</b><span>Today</span></div></li>
+    <li><i class="d"></i><div><b>Shipped</b><span>Within 1-2 business days. Tracking is emailed when it ships.</span></div></li>
+    <li><i class="d"></i><div><b>Delivered</b><span>Typically 5-8 business days after shipping</span></div></li></ul></div>
+  <div class="box"><h2>Order details</h2><div class="grid2">
+    <div><h3>Contact</h3><div id="cemail"></div></div><div><h3>Payment</h3><div>Paid by card &middot; <span id="tot2"></span></div></div>
+    <div><h3>Shipping address</h3><div id="addr"></div></div><div><h3>Shipping method</h3><div>Free standard shipping</div></div></div></div>
+  <div class="box"><h2>Need help with your order?</h2><p>Email <a href="mailto:support@ciracove.com">support@ciracove.com</a> with your order reference. We reply within 1 business day, Monday to Friday.</p>
+    <p class="muted" style="font-size:13px">Covered by our 30-day money-back guarantee. <a href="./refund-policy">Refund policy</a> &middot; <a href="./shipping-policy">Shipping policy</a></p></div>
+  <div class="cta"><span class="muted">Charges appear as CIRACOVE.</span><a class="btn" href="https://ciracove.com">Continue shopping</a></div>
+</section>
+<aside class="r"><div id="lines"></div>
+  <div class="sum" style="margin-top:12px"><span>Subtotal</span><span id="sub"></span></div><div class="sum"><span>Shipping</span><span>Free</span></div>
+  <div class="sum tot"><span>Total paid</span><span id="tot"></span></div>
+  <p class="muted" style="font-size:12px;margin-top:10px">Order reference <span class="ref" id="ref"></span></p></aside>
+</main>
+<script src="./mock-api.js"></script><script src="./common.js"></script>
+<script>(async () => {
+  await loadConfig(); const t = new URLSearchParams(location.search).get('t') || sessionStorage.getItem('cira_token');
+  const r = await (await fetch('/api/finalize', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ token: t }) })).json();
+  if (r.error) { $('#emailline').textContent = r.error; return; }
+  const c = r.customer || {}, a = c.address || {};
+  if (c.firstName) $('#greet').textContent = `Thank you, ${c.firstName}.`;
+  $('#refline').textContent = 'Order ' + r.eventId.slice(-10).toUpperCase();
+  if (c.email) { $('#emailline').textContent = `We sent a confirmation to ${c.email}. Everything ships together in one box.`; $('#cemail').textContent = c.email; }
+  $('#addr').innerHTML = [`${c.firstName || ''}`, a.line1, a.line2, `${a.city}, ${a.state} ${a.postal_code}`, 'United States'].filter(Boolean).join('<br>');
+  $('#lines').innerHTML = r.items.map(i => `<div class="it"><div class="th">${i.image ? `<img src="${i.image}" alt="">` : ''}<i>${i.qty}</i></div><div class="n">${i.title}</div><div class="p">${money(i.price)}</div></div>`).join('');
+  $('#tot').textContent = $('#sub').textContent = $('#tot2').textContent = money(r.total); $('#ref').textContent = r.eventId;
+  const key = 'cira_purchase_' + r.eventId; // fire once per order, even on refresh
+  if (!sessionStorage.getItem(key)) {
+    const v = r.items.filter(i => i.variantId);
+    fbq('track', 'Purchase', { value: r.total / 100, currency: 'USD', content_type: 'product', content_ids: v.map(i => i.variantId.split('/').pop()),
+      contents: v.map(i => ({ id: i.variantId.split('/').pop(), quantity: i.qty, item_price: i.price / 100 })), num_items: r.items.length }, { eventID: r.eventId });
+    sessionStorage.setItem(key, '1');
+  }
+})();</script></body></html>
