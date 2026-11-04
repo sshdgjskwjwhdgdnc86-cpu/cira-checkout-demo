@@ -15,6 +15,7 @@ async function loadConfig() {
 function fbcValue() { const c = getCookie('_fbc'); if (c) return c; const id = new URLSearchParams(location.search).get('fbclid'); return id ? `fb.1.${Date.now()}.${id}` : null; }
 const LOCK = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="11" width="14" height="10" rx="1"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>';
 (function chrome() {
+  if (document.body.dataset.shopify) return;
   const noAnn = document.body.dataset.noann;
   document.body.insertAdjacentHTML('afterbegin', (noAnn ? '' : '<div class="ann">Free US shipping &middot; 30-day money-back guarantee</div>') +
     `<header><div class="in"><a class="logo" href="https://ciracove.com">CIRA</a><span class="secure">${LOCK} Secure checkout</span></div></header>`);

@@ -1,77 +1,78 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Checkout - CIRA</title><link rel="stylesheet" href="./style.css"></head><body>
-<main class="co">
-<section class="pp">
-  <img class="main" id="pimg" alt="Cira Antifungal Cream">
-  <h1 id="ptitle"></h1><p class="sub" id="psub"></p>
-  <div class="bl">Choose your bundle</div><div id="bundles"></div>
-  <div class="assure"><b>30-day money-back guarantee.</b> If it is not for you, email us within 30 days of delivery for a full refund. <a href="./refund-policy">Refund policy</a><br><br><b>Free US shipping.</b> Ships in 1-2 business days with tracking.</div>
-</section>
-<section class="form">
-  <form id="f">
-  <h2>Contact</h2>
-  <label>Email</label><input name="email" type="email" required autocomplete="email">
-  <label>Phone (optional, for delivery updates)</label><input name="phone" type="tel" autocomplete="tel">
-  <h2>Shipping address</h2>
-  <div class="row"><div><label>First name</label><input name="firstName" required autocomplete="given-name"></div><div><label>Last name</label><input name="lastName" required autocomplete="family-name"></div></div>
-  <label>Address</label><input name="line1" required autocomplete="address-line1">
-  <label>Apartment, suite (optional)</label><input name="line2" autocomplete="address-line2">
-  <div class="row3"><div><label>City</label><input name="city" required></div><div><label>State</label><input name="state" required maxlength="2" placeholder="TX"></div><div><label>ZIP</label><input name="postal_code" required inputmode="numeric"></div></div>
-  <h2>Payment</h2><p class="muted" style="font-size:12px;margin:-4px 0 10px">All transactions are secure and encrypted.</p>
-  <div id="payment"></div>
-  <h2>Order summary</h2>
-  <div class="sum"><span id="sline"></span><span id="sprice"></span></div>
-  <div class="sum"><span>Shipping</span><span>Free</span></div>
-  <div class="sum tot"><span>Total</span><span id="stotal"></span></div>
-  <button class="btn" id="pay" type="submit">Complete order</button>
-  <div class="err" id="err"></div>
-  <p class="fine">By placing your order you agree to our <a href="./terms">Terms</a> and <a href="./refund-policy">Refund policy</a>. Your card is stored securely by Stripe so you can add items on the next page with one click. Charges appear as CIRACOVE.</p>
-  </form>
-</section></main>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Checkout - CIRA</title><link rel="stylesheet" href="./shopify.css"></head><body data-shopify="1">
+<header class="sh-top"><div class="in"><a class="sh-logo" href="https://ciracove.com">CIRA</a><a class="sh-bag" href="https://ciracove.com/cart" aria-label="Cart"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 8h14l-1 12H6L5 8z" stroke-linejoin="round"/><path d="M9 8V6a3 3 0 016 0v2"/></svg></a></div></header>
+<div class="msum" id="msumT"><span>Order summary <svg width="10" height="10" viewBox="0 0 10 10"><path d="M1 3l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></span><b class="jtot"></b></div>
+<div class="msum-body" id="msumB" style="display:none"></div>
+<div class="sh-wrap"><main class="sh-main"><div>
+<form id="f" novalidate>
+<div class="express">Express checkout</div>
+<div class="xb"><div style="background:#5a31f4;color:#fff">shop</div><div style="background:#ffc439;color:#003087;font-style:italic">PayPal</div><div style="background:#000;color:#fff"> Pay</div><div style="background:#000;color:#fff">G Pay</div></div>
+<div class="or">OR</div>
+<div class="hd"><h2 class="sh">Contact</h2><a href="#">Sign in</a></div>
+<div class="fld"><input name="email" type="email" placeholder="Email" autocomplete="email" required><span class="ic">ⓘ</span></div>
+<label class="chk"><i><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6l3 3 5-6" fill="none" stroke="#fff" stroke-width="2"/></svg></i>Email me with news and offers</label>
+<h2 class="sh">Delivery</h2>
+<div class="fld sel"><label>Country/Region</label><select name="country"><option>United States</option></select></div>
+<div class="row2 np"><div class="fld"><input name="firstName" placeholder="First name" autocomplete="given-name"></div><div class="fld"><input name="lastName" placeholder="Last name" autocomplete="family-name" required></div></div>
+<div class="fld"><input name="line1" placeholder="Address" autocomplete="address-line1" required><span class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></span></div>
+<div class="fld"><input name="line2" placeholder="Apartment, suite, etc. (optional)" autocomplete="address-line2"></div>
+<div class="row3"><div class="fld"><input name="city" placeholder="City" autocomplete="address-level2" required></div>
+<div class="fld sel"><label>State</label><select name="state" id="state"></select></div>
+<div class="fld"><input name="postal_code" placeholder="ZIP code" inputmode="numeric" autocomplete="postal-code" required></div></div>
+<div class="fld"><input name="phone" type="tel" placeholder="Phone (optional)" autocomplete="tel"><span class="ic">ⓘ</span></div>
+<h3 class="sh">Shipping method</h3>
+<div id="shipm" class="note">Enter your shipping address to view available shipping methods.</div>
+<h2 class="sh" style="margin-bottom:4px">Payment</h2><p style="margin:0 0 14px;color:#707070">All transactions are secure and encrypted.</p>
+<div class="pay"><div class="h"><b>Credit card</b><span class="cards"><span style="background:#1a1f71">VISA</span><span style="background:#eb001b">MC</span><span style="background:#2e77bb">AMEX</span><span style="background:#ddd;color:#555">+5</span></span></div>
+<div class="b" id="payment"><div class="fld"><input placeholder="Card number" inputmode="numeric" value="4242 4242 4242 4242"></div>
+<div class="row2"><div class="fld"><input placeholder="Expiration date (MM / YY)" value="12 / 34"></div><div class="fld"><input placeholder="Security code" value="123"><span class="ic">ⓘ</span></div></div>
+<div class="fld" style="margin:0"><input placeholder="Name on card" id="noc"></div></div></div>
+<label class="chk" style="margin-top:16px"><i><svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 6l3 3 5-6" fill="none" stroke="#fff" stroke-width="2"/></svg></i>Use shipping address as billing address</label>
+<div id="mockflag"></div>
+<button class="btn-pay" id="pay" type="submit">Pay now</button><div class="err" id="err"></div>
+<div class="foot"><a href="./refund-policy">Refund policy</a><a href="./shipping-policy">Shipping</a><a href="./privacy-policy">Privacy policy</a><a href="./terms">Terms of service</a><a href="./contact">Contact</a></div>
+</form></div></main>
+<aside class="sh-side"><div id="sum"></div></aside></div>
 <script src="./mock-api.js"></script><script src="./common.js"></script>
 <script>
-let cfg, sel, stripe, elements;
+const STATES='AL AK AZ AR CA CO CT DE DC FL GA HI ID IL IN IA KS KY LA ME MD MA MI MN MS MO MT NE NV NH NJ NM NY NC ND OH OK OR PA RI SC SD TN TX UT VT VA WA WV WI WY'.split(' ');
+$('#state').innerHTML=STATES.map(s=>`<option${s==='TX'?' selected':''}>${s}</option>`).join('');
+let cfg, item, stripe, elements;
+const summary = () => `<div class="line"><div class="th"><img src="${cfg.product.image}" alt=""><b>1</b></div><div class="n">${cfg.product.title}<small>${item.variantTitle}</small></div><div>${money(item.price)}</div></div>
+<div class="disc"><div class="fld"><input placeholder="Discount code or gift card"></div><button type="button">Apply</button></div>
+<div class="tot"><span>Subtotal</span><span>${money(item.price)}</span></div><div class="tot"><span>Shipping</span><span class="shipv" style="color:#707070">Enter shipping address</span></div>
+<div class="tot big"><span>Total</span><span><small>USD</small>${money(item.price)}</span></div>`;
 (async () => {
-  cfg = await loadConfig(); const p = cfg.product;
-  $('#pimg').src = p.image; $('#ptitle').textContent = p.title; $('#psub').textContent = p.subtitle;
-  sel = cfg.bundles.find(b => b.popular) || cfg.bundles[0];
-  const render = () => {
-    $('#bundles').innerHTML = cfg.bundles.map(b => `<div class="bundle ${b.id===sel.id?'sel':''}" data-id="${b.id}">${b.popular?'<span class="tag">MOST POPULAR</span>':''}
-      <span class="r"></span><div class="t"><b>${b.label}</b>${b.compareAt?`<span class="save">SAVE ${money(b.compareAt-b.price)}</span>`:''}<div class="n">${b.note}</div></div>
-      <div class="p">${money(b.price)}${b.compareAt?`<s>${money(b.compareAt)}</s>`:''}</div></div>`).join('');
-    document.querySelectorAll('.bundle').forEach(el => el.onclick = () => { sel = cfg.bundles.find(b => b.id === el.dataset.id); render(); });
-    $('#sline').textContent = `${p.title} - ${sel.label}`; $('#sprice').textContent = money(sel.price); $('#stotal').textContent = money(sel.price);
-    if (elements) elements.update({ amount: sel.price });
-  };
-  render();
-  fbq('track', 'InitiateCheckout', { value: sel.price / 100, currency: 'USD', content_ids: [sel.variantId.split('/').pop()], content_type: 'product' });
-  if (cfg.mock) {
-    $('#payment').innerHTML = `<div class="mock"><b>Local test mock.</b> No Stripe test key is set, so the Stripe Payment Element (card, Apple Pay, Google Pay, Link) is replaced by this box. Add STRIPE_SECRET_KEY / STRIPE_PUBLISHABLE_KEY (sk_test_/pk_test_) to .env to render the real element.<br><br>
-      <label>Card number</label><input value="4242 4242 4242 4242" disabled><div class="row"><div><label>Expiry</label><input value="12 / 34" disabled></div><div><label>CVC</label><input value="123" disabled></div></div></div>`;
-  } else {
+  cfg = await loadConfig();
+  const key = new URLSearchParams(location.search).get('item'); item = cfg.items[key] || cfg.items[cfg.defaultItem];
+  $('#sum').innerHTML = summary(); $('#msumB').innerHTML = summary(); document.querySelectorAll('.jtot').forEach(e => e.textContent = money(item.price));
+  $('#msumT').onclick = () => { const b = $('#msumB'); b.style.display = b.style.display === 'none' ? 'block' : 'none'; };
+  fbq('track', 'InitiateCheckout', { value: item.price / 100, currency: 'USD', content_ids: [item.variantId.split('/').pop()], content_type: 'product' });
+  if (cfg.mock) $('#mockflag').innerHTML = '<div class="mockflag">Test mode: no real card is charged. Card fields are prefilled.</div>';
+  else {
     const s = document.createElement('script'); s.src = 'https://js.stripe.com/v3/'; document.head.appendChild(s); await new Promise(r => s.onload = r);
     stripe = Stripe(cfg.publishableKey);
-    elements = stripe.elements({ mode: 'payment', amount: sel.price, currency: 'usd', setupFutureUsage: 'off_session', appearance: { theme: 'stripe', variables: { colorPrimary: '#2f5d4e' } } });
-    elements.create('payment', { layout: 'tabs', wallets: { applePay: 'auto', googlePay: 'auto' } }).mount('#payment');
+    elements = stripe.elements({ mode: 'payment', amount: item.price, currency: 'usd', setupFutureUsage: 'off_session', appearance: { theme: 'stripe', variables: { colorPrimary: '#005bd1', borderRadius: '5px', fontFamily: '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif' } } });
+    $('#payment').innerHTML = ''; elements.create('payment', { layout: 'tabs', wallets: { applePay: 'auto', googlePay: 'auto' } }).mount('#payment');
   }
+  const upd = () => { const f = $('#f'); if (f.line1.value && f.city.value && f.postal_code.value.length >= 5) { $('#shipm').className = 'ship'; $('#shipm').innerHTML = '<span>Free Shipping</span><span>FREE</span>'; document.querySelectorAll('.shipv').forEach(e => { e.textContent = 'FREE'; e.style.color = '#000'; }); } };
+  ['line1', 'city', 'postal_code'].forEach(n => $('#f')[n].addEventListener('input', upd));
 })();
 $('#f').onsubmit = async e => {
-  e.preventDefault(); $('#err').textContent = ''; $('#pay').disabled = true; $('#pay').textContent = 'Processing...';
+  e.preventDefault(); $('#err').textContent = '';
   const fd = Object.fromEntries(new FormData(e.target));
-  const customer = { email: fd.email, phone: fd.phone, firstName: fd.firstName, lastName: fd.lastName,
-    address: { line1: fd.line1, line2: fd.line2, city: fd.city, state: fd.state.toUpperCase(), postal_code: fd.postal_code, country: 'US' } };
+  for (const [k, m] of [['email', 'Enter an email'], ['lastName', 'Enter a last name'], ['line1', 'Enter an address'], ['city', 'Enter a city'], ['postal_code', 'Enter a ZIP code']]) if (!fd[k]) { $('#err').textContent = m; e.target[k].focus(); return; }
+  $('#pay').disabled = true; $('#pay').textContent = 'Processing...';
+  const customer = { email: fd.email, phone: fd.phone, firstName: fd.firstName || fd.lastName, lastName: fd.lastName,
+    address: { line1: fd.line1, line2: fd.line2, city: fd.city, state: fd.state, postal_code: fd.postal_code, country: 'US' } };
   try {
     if (!cfg.mock) { const { error } = await elements.submit(); if (error) throw error; }
     const r = await (await fetch('/api/checkout', { method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ bundleId: sel.id, customer, fbp: getCookie('_fbp'), fbc: fbcValue(), sourceUrl: location.href }) })).json();
+      body: JSON.stringify({ item: item.key, customer, fbp: getCookie('_fbp'), fbc: fbcValue(), sourceUrl: location.href }) })).json();
     if (r.error) throw new Error(r.error);
     sessionStorage.setItem('cira_token', r.token);
-    if (!cfg.mock) {
-      const { error } = await stripe.confirmPayment({ elements, clientSecret: r.clientSecret, redirect: 'if_required',
-        confirmParams: { return_url: location.origin + '/upsell1?t=' + r.token } });
-      if (error) throw error;
-    }
+    if (!cfg.mock) { const { error } = await stripe.confirmPayment({ elements, clientSecret: r.clientSecret, redirect: 'if_required', confirmParams: { return_url: location.origin + '/upsell1?t=' + r.token } }); if (error) throw error; }
     await fetch('/api/checkout/confirmed', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ token: r.token }) });
     location.href = './upsell1?t=' + r.token;
-  } catch (err) { $('#err').textContent = err.message || 'Payment failed. Please try again.'; $('#pay').disabled = false; $('#pay').textContent = 'Complete order'; }
+  } catch (err) { $('#err').textContent = err.message || 'Payment failed. Please try again.'; $('#pay').disabled = false; $('#pay').textContent = 'Pay now'; }
 };
 </script></body></html>
