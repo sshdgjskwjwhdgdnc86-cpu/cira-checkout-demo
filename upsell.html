@@ -1,35 +1,42 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Your order - CIRA</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--g:#315e43;--g2:#2a5139;--ink:#121212;--txt:rgba(18,18,18,.75);--mut:#555;--line:#e3e6df;--tint:#f1f4ec;--gold:#d9a748;--red:#a52525}
+:root{--g:#315e43;--g2:#2a5139;--ink:#121212;--txt:rgba(18,18,18,.75);--mut:#555;--line:#e3e6df;--tint:#f1f4ec;--red:#a52525}
 *{box-sizing:border-box}html{-webkit-text-size-adjust:100%}body{margin:0;font-family:Inter,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;color:var(--txt);background:#fff;font-size:16px;line-height:1.5}
 img{display:block;max-width:100%}a{color:inherit}.gone{display:none!important}
-.bar{background:var(--g);color:#fff;text-align:center;font-size:12px;font-weight:600;letter-spacing:.04em;padding:9px 12px;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,.12)}
-.bar b{font-variant-numeric:tabular-nums;font-size:13px;margin-left:4px;letter-spacing:.02em}
+.bar{background:var(--g);color:#fff;text-align:center;font-size:12px;font-weight:600;letter-spacing:.04em;padding:9px 12px;text-transform:uppercase}
+.bar b{font-variant-numeric:tabular-nums;font-size:13px;margin-left:4px}
 .hd{background:var(--g)}.hd .in{max-width:1200px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between}
 .logo{color:#fff;text-decoration:none;font-size:22px;font-weight:500;letter-spacing:.28em}
 .conf{color:#fff;font-size:12px;opacity:.9;display:flex;align-items:center;gap:6px}.conf svg{width:15px;height:15px}
 .wrap{max-width:1200px;margin:0 auto;padding:24px 20px 8px;display:grid;grid-template-columns:1fr;gap:20px}
 @media(min-width:990px){.wrap{grid-template-columns:1fr 1fr;gap:32px;padding:24px 68px 8px}}
-.gal{position:relative}.stage{position:relative;border-radius:10px;overflow:hidden;background:var(--tint)}
-.stage img{width:100%;aspect-ratio:1/1;object-fit:cover}
-.arr{position:absolute;top:50%;transform:translateY(-50%);width:34px;height:34px;border-radius:50%;background:#fff;border:1px solid rgba(0,0,0,.08);box-shadow:0 1px 4px rgba(0,0,0,.08);font-size:20px;line-height:30px;text-align:center;cursor:pointer;color:var(--ink);padding:0}
-.arr.l{left:10px}.arr.r{right:10px}
-.th{display:flex;gap:7px;margin-top:10px;overflow-x:auto;scrollbar-width:none}.th::-webkit-scrollbar{display:none}
-.th img{width:58px;height:58px;flex:none;object-fit:cover;border-radius:4px;border:2px solid transparent;cursor:pointer;background:var(--tint)}
-.th img.on{border-color:var(--g)}@media(min-width:990px){.th img{width:50px;height:50px}}
+.stage{border-radius:10px;overflow:hidden;background:var(--tint)}.stage img{width:100%;aspect-ratio:1/1;object-fit:cover}
 .eb{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--g);background:var(--tint);border-radius:3px;padding:4px 8px;margin:0 0 10px}
 h1{font-size:26px;line-height:1.2;font-weight:600;color:var(--ink);margin:0 0 6px;letter-spacing:-.005em}@media(min-width:990px){h1{font-size:32px}}
 .rate{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--ink);margin:0 0 12px}.rate .s{color:#121212;font-size:13px;letter-spacing:1px}.rate b{font-size:11px}.rate span{color:var(--mut)}
 .sub{font-size:14px;line-height:1.55;margin:0 0 14px;color:var(--txt)}
 .ben{display:grid;grid-template-columns:1fr 1fr;gap:9px 16px;margin:0 0 18px;padding:0;list-style:none;font-size:12.5px;color:var(--ink)}
 .ben li{display:flex;gap:9px;align-items:flex-start;line-height:1.35}.ben li:before{content:"\2713";font-weight:700;font-size:15px;line-height:1}
+.blabel{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin:4px 0 10px;display:flex;align-items:center;gap:10px;color:var(--ink)}
+.blabel:after{content:"";flex:1;height:1px;background:var(--line)}
+.bun{position:relative;display:flex;align-items:center;gap:12px;border:1.5px solid var(--line);border-radius:8px;padding:16px 14px;margin:0 0 10px;cursor:pointer;background:#fff}
+.bun.sel{border-color:var(--g);border-width:2px;background:#f4f6f1;box-shadow:inset 0 0 0 1px var(--g)}
+.bun .r{width:20px;height:20px;border-radius:50%;border:2px solid #9aa39d;flex:none}.bun.sel .r{border:6px solid var(--g)}
+.bun .t{flex:1}.bun .t b{display:block;font-size:17px;font-weight:700;color:#000;line-height:1.2}.bun .t span{font-size:13px;color:var(--mut)}
+.bun .p{text-align:right}.bun .p b{display:block;font-size:20px;font-weight:700;color:#000}.bun .p s{font-size:13px;color:var(--mut)}
+.tag{position:absolute;top:-10px;right:14px;background:var(--g);color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:3px;letter-spacing:.06em}
+.subbox{border:1.5px dashed var(--g);border-radius:8px;padding:14px;margin:14px 0 0;cursor:pointer;display:flex;gap:12px;align-items:flex-start}
+.subbox .ck{width:20px;height:20px;border-radius:4px;border:2px solid var(--g);flex:none;margin-top:1px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:700}
+.subbox.on .ck{background:var(--g)}.subbox .ck:before{content:""}.subbox.on .ck:before{content:"\2713"}
+.subbox b{display:block;font-size:15px;font-weight:700;color:#000}.subbox .d{font-size:13px;color:var(--mut);margin-top:2px}
+.subnote{font-size:12px;color:#5a625b;margin:10px 0 0;line-height:1.5}
 .card{position:relative;border:2px solid var(--g);border-radius:8px;overflow:hidden;margin-top:6px}
 .card .badge{position:absolute;top:-1px;right:12px;background:var(--g);color:#fff;font-size:10px;font-weight:700;letter-spacing:.04em;padding:3px 7px;border-radius:0 0 4px 4px}
 .card .top{display:flex;align-items:center;gap:14px;padding:22px 18px 18px;background:#fff}
 .rad{width:20px;height:20px;border-radius:50%;border:2px solid var(--g);flex:none;position:relative}.rad:after{content:"";position:absolute;inset:3px;border-radius:50%;background:var(--g)}
-.card .t{flex:1}.card .t b{display:block;font-size:18px;font-weight:700;color:#000;line-height:1.2}.card .t span{font-size:14px;color:var(--mut)}
-.card .p{text-align:right}.card .p b{display:block;font-size:21px;font-weight:750;color:#000}.card .p s{font-size:14px;color:var(--mut)}
+.card .t{flex:1}.card .t b{display:block;font-size:18px;font-weight:700;color:#000}.card .t span{font-size:14px;color:var(--mut)}
+.card .p{text-align:right}.card .p b{display:block;font-size:21px;font-weight:700;color:#000}.card .p s{font-size:14px;color:var(--mut)}
 .card .rows div{background:var(--g);color:#fff;font-size:13.5px;font-weight:700;padding:12px 18px;border-top:1px solid rgba(255,255,255,.18)}
 .yes{display:block;width:100%;margin-top:16px;background:var(--g);color:#fff;border:0;border-radius:12px;padding:16px 14px;font:500 18px/1.25 Inter,sans-serif;cursor:pointer}
 .yes:hover{background:var(--g2)}.yes:disabled,.no:disabled{opacity:.6}.yes small{display:block;font-size:12.5px;font-weight:400;opacity:.85;margin-top:3px}
@@ -41,7 +48,6 @@ h1{font-size:26px;line-height:1.2;font-weight:600;color:var(--ink);margin:0 0 6p
 .ph-banner{background:#fff3cd;border:2px dashed #b08a2e;color:#6b5418;padding:10px;font-weight:700;margin-bottom:12px;font-size:14px}
 .ft{border-top:1px solid var(--line);margin-top:40px;padding:22px 16px 36px;text-align:center;font-size:12px;color:var(--mut)}.ft nav{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 16px;margin-bottom:8px}
 .dead{max-width:560px;margin:48px auto;padding:0 20px;text-align:center}.dead h1{margin-bottom:8px}
-/* mobile: headline sits above gallery so the offer reads in the first screen */
 .mh{display:block}.dh{display:none}@media(min-width:990px){.mh{display:none}.dh{display:block}}
 </style></head><body data-shopify="1">
 <div class="bar" id="bar">Order confirmed<span id="tw" class="gone"> &middot; Offer expires in <b id="clock">5:00</b></span></div>
@@ -49,17 +55,18 @@ h1{font-size:26px;line-height:1.2;font-weight:600;color:var(--ink);margin:0 0 6p
 <main id="live" class="gone"><div class="wrap">
   <div>
     <div class="mh" id="headM"></div>
-    <div class="gal" id="gal"></div>
+    <div id="gal"></div>
   </div>
   <div>
     <div id="phb"></div>
     <div class="dh" id="headD"></div>
     <p class="sub" id="sub"></p>
     <ul class="ben" id="ben"></ul>
-    <div class="card"><div class="badge" id="badge"></div>
-      <div class="top"><div class="rad"></div><div class="t"><b id="ct"></b><span id="cs"></span></div><div class="p"><b id="cp"></b><s id="cc"></s></div></div>
-      <div class="rows" id="rows"></div></div>
-    <button class="yes" id="yes">Yes, add to my order &middot; <span id="p1"></span><small>One click. Charged to the card you just used.</small></button>
+    <div id="picker"></div>
+    <div id="simple" class="gone"></div>
+    <div id="subwrap" class="gone"></div>
+    <p class="subnote gone" id="subnote"></p>
+    <button class="yes" id="yes">Yes, add to my order &middot; <span id="p1"></span><small id="ysub">One click. Charged to the card you just used.</small></button>
     <button class="no" id="no">No thanks, I will skip this offer</button>
     <div class="err" id="err"></div>
     <p class="urg" id="urg"></p>
@@ -89,21 +96,77 @@ h1{font-size:26px;line-height:1.2;font-weight:600;color:var(--ink);margin:0 0 6p
   $('#headM').innerHTML = head; $('#headD').innerHTML = head;
   $('#sub').textContent = o.sub || (o.copy || []).join(' ');
   $('#ben').innerHTML = (o.benefits || []).map(b => `<li>${esc(b)}</li>`).join(''); if (!(o.benefits || []).length) $('#ben').classList.add('gone');
-  $('#ct').textContent = o.cardTitle || o.title; $('#cs').textContent = o.cardSub || '';
-  $('#cp').textContent = money(o.price); $('#cc').textContent = o.compareAt ? money(o.compareAt) : '';
-  if (o.badge) $('#badge').textContent = o.badge; else $('#badge').classList.add('gone');
-  $('#rows').innerHTML = [...(o.compareAt ? [`+ You save ${money(o.compareAt - o.price)} today`] : []), ...(o.rows || []).map(r => '+ ' + r)].map(r => `<div>${esc(r)}</div>`).join('');
-  $('#p1').textContent = money(o.price); $('#urg').textContent = o.urgency || '';
-  const ph = '<div class="ph">PLACEHOLDER IMAGE<br>' + (o.image ? 'add ' + o.image : 'Upsell 2 image TBD') + '</div>';
-  const g = o.gallery || [];
-  if (g.length) {
-    let i = 0;
-    $('#gal').innerHTML = `<div class="stage"><img id="gmain" src="${g[0]}" alt="${esc(o.title)}"><button class="arr l" id="gl" aria-label="Previous">&lsaquo;</button><button class="arr r" id="gr" aria-label="Next">&rsaquo;</button></div><div class="th">${g.map((s, n) => `<img src="${s}" class="${n ? '' : 'on'}" alt="">`).join('')}</div>`;
-    $('#gmain').onerror = () => $('#gal').innerHTML = ph;
-    const th = [...document.querySelectorAll('.th img')];
-    const show = n => { i = (n + g.length) % g.length; $('#gmain').src = g[i]; th.forEach((x, k) => x.classList.toggle('on', k === i)); };
-    th.forEach((im, n) => im.onclick = () => show(n)); $('#gl').onclick = () => show(i - 1); $('#gr').onclick = () => show(i + 1);
-  } else $('#gal').innerHTML = ph;
+  $('#urg').textContent = o.urgency || '';
+
+  const img = (o.gallery && o.gallery[0]) || o.image;
+  if (img) {
+    $('#gal').innerHTML = `<div class="stage"><img src="${img}" alt="${esc(o.title || '')}" onerror="this.parentNode.outerHTML='<div class=ph>Image missing</div>'"></div>`;
+  } else $('#gal').innerHTML = '<div class="ph">PLACEHOLDER IMAGE<br>Upsell 2 image TBD</div>';
+
+  let bundleId = o.defaultBundle || (o.bundles && o.bundles.find(b => b.popular)?.id) || (o.bundles && o.bundles[0]?.id);
+  let subscribe = !!o.defaultSubscribe;
+
+  const priceOf = () => {
+    if (o.picker) {
+      const b = o.bundles.find(x => x.id === bundleId) || o.bundles[0];
+      return { price: subscribe ? b.subPrice : b.price, compareAt: b.compareAt, qty: b.qty, label: b.label };
+    }
+    const base = o.price; return { price: (o.subscribeToggle && subscribe) ? Math.round(base * 0.85) : base, compareAt: o.compareAt, qty: o.qty || 1, label: o.cardTitle || o.title };
+  };
+  const paint = () => {
+    const p = priceOf();
+    $('#p1').textContent = money(p.price);
+    if (subscribe && o.subscribeToggle) {
+      $('#ysub').textContent = 'Starts today. Then every 30 days. Cancel anytime.';
+      $('#subnote').textContent = `${money(p.price)} today, then ${money(p.price)} every 30 days until canceled. Ships in the same box as your cream. Cancel anytime.`;
+      $('#subnote').classList.remove('gone');
+    } else {
+      $('#ysub').textContent = 'One click. Charged to the card you just used.';
+      $('#subnote').classList.add('gone');
+    }
+    if (o.picker) {
+      document.querySelectorAll('.bun').forEach(el => {
+        const id = el.dataset.id; const b = o.bundles.find(x => x.id === id); const on = id === bundleId;
+        el.classList.toggle('sel', on);
+        const pr = subscribe ? b.subPrice : b.price;
+        el.querySelector('.p').innerHTML = `<b>${money(pr)}</b>${b.compareAt ? `<s>${money(b.compareAt)}</s>` : ''}`;
+      });
+    } else if (!o.placeholder) {
+      $('#cp').textContent = money(p.price);
+      $('#cc').textContent = p.compareAt ? money(p.compareAt) : '';
+      const rows = [];
+      if (p.compareAt && p.compareAt > p.price) rows.push(`+ You save ${money(p.compareAt - p.price)} today`);
+      rows.push('+ Ships in the same box as your cream');
+      if (subscribe) rows.push('+ Ships every 30 days. Cancel anytime.');
+      $('#rows').innerHTML = rows.map(r => `<div>${esc(r)}</div>`).join('');
+    }
+    const box = $('#subbox'); if (box) box.classList.toggle('on', subscribe);
+  };
+
+  if (o.picker) {
+    $('#picker').innerHTML = `<div class="blabel">Choose your pack</div>` + o.bundles.map(b => `
+      <div class="bun${b.id === bundleId ? ' sel' : ''}" data-id="${b.id}">
+        ${b.popular ? '<span class="tag">MOST POPULAR</span>' : ''}
+        <div class="r"></div><div class="t"><b>${esc(b.label)}</b><span>${esc(b.note)}</span></div>
+        <div class="p"><b></b></div>
+      </div>`).join('');
+    document.querySelectorAll('.bun').forEach(el => el.onclick = () => { bundleId = el.dataset.id; paint(); });
+  } else if (!o.placeholder) {
+    $('#simple').classList.remove('gone');
+    $('#simple').innerHTML = `<div class="card"><div class="badge">${esc(o.badge || '')}</div>
+      <div class="top"><div class="rad"></div><div class="t"><b id="ct">${esc(o.cardTitle || o.title)}</b><span id="cs">${esc(o.cardSub || '')}</span></div>
+      <div class="p"><b id="cp"></b><s id="cc"></s></div></div>
+      <div class="rows" id="rows"></div></div>`;
+    if (!o.badge) $('#simple .badge').classList.add('gone');
+  }
+
+  if (o.subscribeToggle && !o.placeholder) {
+    $('#subwrap').classList.remove('gone');
+    $('#subwrap').innerHTML = `<div class="subbox${subscribe ? ' on' : ''}" id="subbox"><div class="ck"></div><div><b>Subscribe &amp; save 15%</b><div class="d">Automatic refills every 30 days. Cancel anytime.</div></div></div>`;
+    $('#subbox').onclick = () => { subscribe = !subscribe; paint(); };
+  }
+  paint();
+
   if (o.timer) {
     $('#tw').classList.remove('gone'); const skew = st.now - Date.now();
     const tick = () => { const ms = st.expiresAt - (Date.now() + skew); if (ms <= 0) { kill(); return clearInterval(iv); }
@@ -111,7 +174,9 @@ h1{font-size:26px;line-height:1.2;font-weight:600;color:var(--ink);margin:0 0 6p
     const iv = setInterval(tick, 250); tick();
   }
   const go = async accept => { $('#yes').disabled = $('#no').disabled = true; $('#err').textContent = '';
-    const r = await post('/api/offer', { accept });
+    const body = { accept };
+    if (accept && !o.placeholder) { body.bundleId = bundleId; body.subscribe = !!subscribe; }
+    const r = await post('/api/offer', body);
     if (r.status === 'expired') { next = r.next; return kill(); }
     if (r.error) { $('#err').textContent = r.error; $('#yes').disabled = $('#no').disabled = false; return; }
     nav(r.next); };
