@@ -5,13 +5,13 @@ const J=(o,st)=>Promise.resolve(new Response(JSON.stringify(o),{status:st||200,h
 const of=window.fetch.bind(window);
 function ostate(s,o){const st=s.offers[o.key]||(s.offers[o.key]={});if(o.timer&&!st.expiresAt)st.expiresAt=Date.now()+o.windowMs;if(!st.status&&o.timer&&Date.now()>=st.expiresAt)st.status='expired';return st;}
 const nx=(o,st)=>st.status==='accepted'?o.yes:o.no;
-window.ciraDemoSession=function(){const d=load();const bu=CFG.items[CFG.defaultItem];const t=Math.random().toString(16).slice(2)+Date.now().toString(16);d[t]={token:t,eventId:'pi_mock_'+t.slice(0,12),customer:DEMO,items:[{title:CFG.product.title,variantTitle:bu.variantTitle,image:CFG.product.image,qty:bu.qty,price:bu.price,variantId:bu.variantId}],total:bu.price,mainPaid:true,finalized:false,offers:{}};save(d);return t;};
+window.ciraDemoSession=function(){const d=load();const bu=CFG.items[CFG.defaultItem];const t=Math.random().toString(16).slice(2)+Date.now().toString(16);d[t]={token:t,eventId:'pi_mock_'+t.slice(0,12),customer:DEMO,items:[{title:CFG.product.title,variantTitle:bu.variantTitle,image:CFG.product.image,qty:bu.qty,price:bu.price,variantId:bu.variantId}],total:bu.price,mainPaid:true,finalized:false,payments:[],subscriptions:[],offers:{}};save(d);return t;};
 window.fetch=function(u,opt){u=String(u);if(!u.startsWith('/api/'))return of(u,opt);
 const b=opt&&opt.body?JSON.parse(opt.body):{};const d=load();const s=d[b.token];const o=CFG.offers[b.offer];let r;
 try{switch(u){
 case '/api/config':return J(CFG);
 case '/api/checkout':{const bu=CFG.items[b.item]||CFG.bundles.find(x=>x.id===b.bundleId),c=b.customer||{};if(!bu||!c.email||!c.firstName||!c.lastName||!c.address||!c.address.line1)return J({error:'Missing required fields.'},400);
-const t=Math.random().toString(16).slice(2)+Date.now().toString(16);d[t]={token:t,eventId:'pi_mock_'+t.slice(0,12),customer:c,items:[{title:CFG.product.title,variantTitle:bu.variantTitle||bu.label,image:CFG.product.image,qty:bu.qty,price:bu.price}],total:bu.price,mainPaid:false,finalized:false,offers:{}};save(d);return J({token:t,mock:true});}
+const t=Math.random().toString(16).slice(2)+Date.now().toString(16);d[t]={token:t,eventId:'pi_mock_'+t.slice(0,12),customer:c,items:[{title:CFG.product.title,variantTitle:bu.variantTitle||bu.label,image:CFG.product.image,qty:bu.qty,price:bu.price}],total:bu.price,mainPaid:false,finalized:false,payments:[],subscriptions:[],offers:{}};save(d);return J({token:t,mock:true});}
 case '/api/checkout/confirmed':if(!s)return J({error:'Unknown session'},404);s.mainPaid=true;save(d);return J({ok:true});
 case '/api/offer/state':{if(!s||!s.mainPaid||!o)return J({error:'Session not active'},400);if(s.finalized)return J({status:'closed',next:'thank-you'});const st=ostate(s,o);save(d);return J({status:st.status||'open',expiresAt:st.expiresAt||null,now:Date.now(),next:st.status?nx(o,st):null});}
 case '/api/offer':{if(!s||!s.mainPaid||s.finalized||!o)return J({error:'Session not active'},400);const st=ostate(s,o);if(st.status){save(d);return J({status:st.status,next:nx(o,st)});}if(!b.accept){st.status='declined';save(d);return J({status:st.status,next:o.no});}
@@ -23,7 +23,7 @@ if(!o.placeholder){
   st.selection=sel;
 }
 const pid='pi_mock_'+o.key+'_'+b.token.slice(0,6);const subId=(sel&&sel.subscribe)?('sub_mock_'+o.key+'_'+b.token.slice(0,6)):null;
-s.payments.push({id:pid,amount,subscriptionId:subId||undefined});line.forEach(i=>s.items.push(i));s.total+=amount;
+s.payments=s.payments||[];s.payments.push({id:pid,amount,subscriptionId:subId||undefined});line.forEach(i=>s.items.push(i));s.total+=amount;
 if(subId){s.subscriptions=s.subscriptions||[];s.subscriptions.push({id:subId,amount,qty:sel&&sel.qty,offer:o.key});}
 st.status='accepted';save(d);return J({status:'accepted',next:o.yes,selection:st.selection||null,subscriptionId:subId});}
 case '/api/finalize':{if(!s||!s.mainPaid)return J({error:'Session not active'},400);s.finalized=true;s.orderName=s.orderName||('#MOCK-'+(1000+Math.floor(Math.random()*9000)));save(d);
