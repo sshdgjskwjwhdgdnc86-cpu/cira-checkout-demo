@@ -111,7 +111,7 @@ h1{font-size:26px;line-height:1.2;font-weight:600;color:var(--ink);margin:0 0 6p
       const b = o.bundles.find(x => x.id === bundleId) || o.bundles[0];
       return { price: subscribe ? b.subPrice : b.price, compareAt: b.compareAt, qty: b.qty, label: b.label };
     }
-    const base = o.price; return { price: (o.subscribeToggle && subscribe) ? Math.round(base * 0.85) : base, compareAt: o.compareAt, qty: o.qty || 1, label: o.cardTitle || o.title };
+    const base = o.price; return { price: (o.subscribeToggle && subscribe) ? (Math.floor((base*0.85+1)/100)*100-1) : base, compareAt: o.compareAt, qty: o.qty || 1, label: o.cardTitle || o.title };
   };
   const paint = () => {
     const p = priceOf();
