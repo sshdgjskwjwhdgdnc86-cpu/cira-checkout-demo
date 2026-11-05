@@ -1,53 +1,76 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Your order - CIRA</title><link rel="stylesheet" href="./style.css">
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Your order - CIRA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-.prog{max-width:1100px;margin:0 auto;padding:12px 16px;display:flex;gap:6px;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#9aa39d}
-.prog span{flex:1;border-top:3px solid var(--line);padding-top:6px}.prog span.done,.prog span.on{color:var(--green);border-color:var(--green)}
-.timer{background:var(--red);color:#fff;text-align:center;padding:9px 12px;font-size:14px;font-weight:700}.timer b{font-variant-numeric:tabular-nums;font-size:17px;margin-left:4px}
-.of{max-width:1100px;margin:0 auto;padding:6px 16px 0;display:grid;grid-template-columns:1fr;gap:18px}
-@media(min-width:900px){.of{grid-template-columns:1fr 1fr;gap:48px;padding-top:18px}}
-.eyebrow{font-size:13px;font-weight:700;color:var(--green);margin:0 0 6px}
-.of h1{font-size:30px;line-height:1.08;margin:0 0 12px;letter-spacing:-.02em}@media(min-width:900px){.of h1{font-size:42px}}
-.copy p{margin:0 0 10px;font-size:16px}
-.gal .main{width:100%;aspect-ratio:1/1;object-fit:cover;background:var(--bg)}.thumbs{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:6px}
-.thumbs img{aspect-ratio:1/1;object-fit:cover;cursor:pointer;opacity:.7;border:1.5px solid transparent}.thumbs img.on{opacity:1;border-color:var(--green)}
-.pr{display:flex;align-items:baseline;gap:10px;margin:14px 0 4px;flex-wrap:wrap}.pr .now{font-size:30px;font-weight:700}.pr s{font-size:18px}
-.pt{list-style:none;padding:0;margin:14px 0;border-top:1px solid var(--line)}.pt li{padding:9px 0 9px 24px;border-bottom:1px solid var(--line);position:relative;font-size:14px}
-.pt li:before{content:"";position:absolute;left:2px;top:14px;width:10px;height:6px;border-left:2px solid var(--green);border-bottom:2px solid var(--green);transform:rotate(-45deg)}
-.btn.yes{font-size:18px;padding:19px 12px;line-height:1.2}.btn.yes small{display:block;font-weight:400;font-size:13px;opacity:.85;margin-top:3px}
-.no{display:block;width:100%;background:none;border:0;color:var(--muted);text-decoration:underline;font-size:14px;padding:14px;cursor:pointer}
-.urg{font-size:13px;color:var(--red);font-weight:700;margin:10px 0 0}
-.g{display:flex;gap:12px;align-items:flex-start;background:var(--bg);padding:12px;margin-top:8px;font-size:13px}.g b{display:block;font-size:14px}
-.seal{flex:none;width:44px;height:44px;border:1.5px solid var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--green);line-height:1;text-align:center}
-.ph-banner{background:#fff3cd;border:2px dashed #b08a2e;color:#6b5418;padding:10px;font-weight:700;margin-bottom:12px}
-.mcta{display:block}@media(min-width:900px){.mcta{display:none}}.dcta{display:none}@media(min-width:900px){.dcta{display:block}}
-.dead{max-width:560px;margin:40px auto;padding:0 16px;text-align:center}.gone{display:none!important}
-</style></head><body data-noann="1">
-<div class="timer gone" id="timer">Offer reserved for <b id="clock">5:00</b></div>
-<div class="prog"><span class="done">Checkout</span><span class="on" id="pstep">Your offer</span><span>Confirmation</span></div>
-<main id="live">
-<div class="of">
+:root{--g:#315e43;--g2:#2a5139;--ink:#121212;--txt:rgba(18,18,18,.75);--mut:#555;--line:#e3e6df;--tint:#f1f4ec;--gold:#d9a748;--red:#a52525}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}body{margin:0;font-family:Inter,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;color:var(--txt);background:#fff;font-size:16px;line-height:1.5}
+img{display:block;max-width:100%}a{color:inherit}.gone{display:none!important}
+.bar{background:var(--g);color:#fff;text-align:center;font-size:12px;font-weight:600;letter-spacing:.04em;padding:9px 12px;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,.12)}
+.bar b{font-variant-numeric:tabular-nums;font-size:13px;margin-left:4px;letter-spacing:.02em}
+.hd{background:var(--g)}.hd .in{max-width:1200px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between}
+.logo{color:#fff;text-decoration:none;font-size:22px;font-weight:500;letter-spacing:.28em}
+.conf{color:#fff;font-size:12px;opacity:.9;display:flex;align-items:center;gap:6px}.conf svg{width:15px;height:15px}
+.wrap{max-width:1200px;margin:0 auto;padding:24px 20px 8px;display:grid;grid-template-columns:1fr;gap:20px}
+@media(min-width:990px){.wrap{grid-template-columns:1fr 1fr;gap:32px;padding:24px 68px 8px}}
+.gal{position:relative}.stage{position:relative;border-radius:10px;overflow:hidden;background:var(--tint)}
+.stage img{width:100%;aspect-ratio:1/1;object-fit:cover}
+.arr{position:absolute;top:50%;transform:translateY(-50%);width:34px;height:34px;border-radius:50%;background:#fff;border:1px solid rgba(0,0,0,.08);box-shadow:0 1px 4px rgba(0,0,0,.08);font-size:20px;line-height:30px;text-align:center;cursor:pointer;color:var(--ink);padding:0}
+.arr.l{left:10px}.arr.r{right:10px}
+.th{display:flex;gap:7px;margin-top:10px;overflow-x:auto;scrollbar-width:none}.th::-webkit-scrollbar{display:none}
+.th img{width:58px;height:58px;flex:none;object-fit:cover;border-radius:4px;border:2px solid transparent;cursor:pointer;background:var(--tint)}
+.th img.on{border-color:var(--g)}@media(min-width:990px){.th img{width:50px;height:50px}}
+.eb{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--g);background:var(--tint);border-radius:3px;padding:4px 8px;margin:0 0 10px}
+h1{font-size:26px;line-height:1.2;font-weight:600;color:var(--ink);margin:0 0 6px;letter-spacing:-.005em}@media(min-width:990px){h1{font-size:32px}}
+.rate{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--ink);margin:0 0 12px}.rate .s{color:#121212;font-size:13px;letter-spacing:1px}.rate b{font-size:11px}.rate span{color:var(--mut)}
+.sub{font-size:14px;line-height:1.55;margin:0 0 14px;color:var(--txt)}
+.ben{display:grid;grid-template-columns:1fr 1fr;gap:9px 16px;margin:0 0 18px;padding:0;list-style:none;font-size:12.5px;color:var(--ink)}
+.ben li{display:flex;gap:9px;align-items:flex-start;line-height:1.35}.ben li:before{content:"\2713";font-weight:700;font-size:15px;line-height:1}
+.card{position:relative;border:2px solid var(--g);border-radius:8px;overflow:hidden;margin-top:6px}
+.card .badge{position:absolute;top:-1px;right:12px;background:var(--g);color:#fff;font-size:10px;font-weight:700;letter-spacing:.04em;padding:3px 7px;border-radius:0 0 4px 4px}
+.card .top{display:flex;align-items:center;gap:14px;padding:22px 18px 18px;background:#fff}
+.rad{width:20px;height:20px;border-radius:50%;border:2px solid var(--g);flex:none;position:relative}.rad:after{content:"";position:absolute;inset:3px;border-radius:50%;background:var(--g)}
+.card .t{flex:1}.card .t b{display:block;font-size:18px;font-weight:700;color:#000;line-height:1.2}.card .t span{font-size:14px;color:var(--mut)}
+.card .p{text-align:right}.card .p b{display:block;font-size:21px;font-weight:750;color:#000}.card .p s{font-size:14px;color:var(--mut)}
+.card .rows div{background:var(--g);color:#fff;font-size:13.5px;font-weight:700;padding:12px 18px;border-top:1px solid rgba(255,255,255,.18)}
+.yes{display:block;width:100%;margin-top:16px;background:var(--g);color:#fff;border:0;border-radius:12px;padding:16px 14px;font:500 18px/1.25 Inter,sans-serif;cursor:pointer}
+.yes:hover{background:var(--g2)}.yes:disabled,.no:disabled{opacity:.6}.yes small{display:block;font-size:12.5px;font-weight:400;opacity:.85;margin-top:3px}
+.no{display:block;width:100%;margin-top:8px;background:#fff;color:var(--mut);border:1px solid #d6d9d2;border-radius:12px;padding:13px 14px;font:500 14px/1.2 Inter,sans-serif;cursor:pointer}
+.urg{text-align:center;font-size:12px;color:var(--red);font-weight:600;margin:12px 0 0}
+.trust{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;margin:14px 0 0;font-size:11.5px;color:var(--mut)}.trust span{display:flex;align-items:center;gap:5px}.trust svg{width:14px;height:14px;color:var(--g)}
+.err{color:var(--red);font-size:14px;margin-top:10px;text-align:center}
+.ph{width:100%;aspect-ratio:1/1;background:#efeee6;border:2px dashed #b08a2e;display:flex;align-items:center;justify-content:center;color:#6b5418;font-weight:700;font-size:13px;text-align:center;padding:16px}
+.ph-banner{background:#fff3cd;border:2px dashed #b08a2e;color:#6b5418;padding:10px;font-weight:700;margin-bottom:12px;font-size:14px}
+.ft{border-top:1px solid var(--line);margin-top:40px;padding:22px 16px 36px;text-align:center;font-size:12px;color:var(--mut)}.ft nav{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 16px;margin-bottom:8px}
+.dead{max-width:560px;margin:48px auto;padding:0 20px;text-align:center}.dead h1{margin-bottom:8px}
+/* mobile: headline sits above gallery so the offer reads in the first screen */
+.mh{display:block}.dh{display:none}@media(min-width:990px){.mh{display:none}.dh{display:block}}
+</style></head><body data-shopify="1">
+<div class="bar" id="bar">Order confirmed<span id="tw" class="gone"> &middot; Offer expires in <b id="clock">5:00</b></span></div>
+<div class="hd"><div class="in"><a class="logo" href="https://ciracove.com">CIRA</a><span class="conf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>Payment received</span></div></div>
+<main id="live" class="gone"><div class="wrap">
   <div>
-    <div id="phb"></div><p class="eyebrow" id="eyebrow"></p><h1 id="h"></h1>
-    <div class="mcta" id="mprice"></div>
+    <div class="mh" id="headM"></div>
     <div class="gal" id="gal"></div>
   </div>
   <div>
-    <div class="copy dcta" id="copyD"></div>
-    <div class="copy mcta" id="copyM"></div>
-    <div style="font-weight:700;font-size:15px;margin-top:6px" id="otitle"></div>
-    <div class="pr" id="oprice"></div>
-    <ul class="pt" id="points"></ul>
-    <button class="btn yes" id="yes">YES, ADD TO MY ORDER - <span id="p1"></span><small>One click. Charged to the card you just used.</small></button>
+    <div id="phb"></div>
+    <div class="dh" id="headD"></div>
+    <p class="sub" id="sub"></p>
+    <ul class="ben" id="ben"></ul>
+    <div class="card"><div class="badge" id="badge"></div>
+      <div class="top"><div class="rad"></div><div class="t"><b id="ct"></b><span id="cs"></span></div><div class="p"><b id="cp"></b><s id="cc"></s></div></div>
+      <div class="rows" id="rows"></div></div>
+    <button class="yes" id="yes">Yes, add to my order &middot; <span id="p1"></span><small>One click. Charged to the card you just used.</small></button>
     <button class="no" id="no">No thanks, I will skip this offer</button>
     <div class="err" id="err"></div>
     <p class="urg" id="urg"></p>
-    <div class="g"><div class="seal">30<br>DAY</div><div><b>30-day money-back guarantee</b>Ships in the same box as your cream. One-time purchase, no subscription. <a href="./refund-policy">Refund policy</a></div></div>
+    <div class="trust"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>30-day money-back guarantee</span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="6" width="15" height="11"/><path d="M16 9h4l3 3v5h-7"/><circle cx="5.5" cy="18.5" r="1.5"/><circle cx="18.5" cy="18.5" r="1.5"/></svg>Free shipping, same box</span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>Secure payment</span></div>
   </div>
 </div></main>
-<div class="dead gone" id="dead"><h1 style="font-size:28px">This offer has expired</h1><p class="muted">Your original order is confirmed and on its way.</p><button class="btn" id="cont">Continue</button></div>
-<script src="./mock-api.js"></script><script src="./common.js"></script>
+<div class="dead gone" id="dead"><h1>This offer has expired</h1><p>Your original order is confirmed and on its way.</p><button class="yes" id="cont">Continue</button></div>
+<div class="ft"><nav><a href="refund-policy">Refund policy</a><a href="shipping-policy">Shipping</a><a href="privacy-policy">Privacy</a><a href="terms">Terms</a><a href="contact">Contact</a></nav>&copy; 2026 CIRA &middot; ciracove.com</div>
+<script src="mock-api.js"></script><script src="common.js"></script>
 <script>(async () => {
-  const cfg = await loadConfig(); const route = location.pathname.split('/').pop().replace('.html',''); const key = route === 'upsell' ? 'upsell1' : route; const o = cfg.offers[key];
+  const cfg = await loadConfig(); const route = location.pathname.split('/').pop().replace('.html', ''); const key = route === 'upsell' ? 'upsell1' : route; const o = cfg.offers[key];
   const t = new URLSearchParams(location.search).get('t') || sessionStorage.getItem('cira_token');
   const nav = n => location.href = './' + n + '?t=' + t;
   const post = (u, b) => fetch(u, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ token: t, offer: key, ...b }) }).then(r => r.json());
@@ -55,27 +78,34 @@
   const st = await post('/api/offer/state', {});
   if (st.error) return nav('thank-you');
   let next = st.next || o.no;
-  const kill = () => { $('#live').classList.add('gone'); document.querySelector('.prog').classList.add('gone'); $('#dead').classList.remove('gone'); $('#timer').textContent = 'Offer expired'; $('#timer').classList.remove('gone'); };
+  const kill = () => { $('#live').classList.add('gone'); $('#dead').classList.remove('gone'); $('#bar').textContent = 'Offer expired'; };
   $('#cont').onclick = () => nav(next);
   if (st.status === 'expired') return kill();
   if (st.status !== 'open') return nav(st.next);
-  if (o.step === 3) $('#pstep').textContent = 'One more thing';
+  $('#live').classList.remove('gone');
   if (o.placeholder) $('#phb').innerHTML = '<div class="ph-banner">PLACEHOLDER PAGE - Upsell 2 content TBD. Not for launch.</div>';
-  $('#eyebrow').textContent = o.eyebrow; $('#h').textContent = o.headline;
-  const copy = o.copy.map(c => `<p>${c}</p>`).join(''); $('#copyD').innerHTML = copy; $('#copyM').innerHTML = copy;
-  $('#otitle').textContent = o.title; $('#p1').textContent = money(o.price);
-  const pr = `<span class="now">${money(o.price)}</span>${o.compareAt ? `<s>${money(o.compareAt)}</s><span class="save">SAVE ${money(o.compareAt - o.price)}</span>` : ''}`;
-  $('#oprice').innerHTML = pr;
-  $('#points').innerHTML = o.points.map(p => `<li>${p}</li>`).join(''); if (!o.points.length) $('#points').classList.add('gone');
-  $('#urg').textContent = o.urgency;
-  const ph = '<div class="ph">PLACEHOLDER IMAGE<br>' + (o.image ? 'add ' + o.image.replace('/soap-img/', '/workspace/cira-soap/') : 'Upsell 2 image TBD') + '</div>';
-  if (o.gallery && o.gallery.length) {
-    $('#gal').innerHTML = `<img class="main" id="gmain" src="${o.gallery[0]}" alt="${o.title}"><div class="thumbs">${o.gallery.map((g, i) => `<img src="${g}" class="${i ? '' : 'on'}" alt="">`).join('')}</div>`;
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const head = `<p class="eb">${esc(o.eyebrow)}</p><h1>${esc(o.headline)}</h1>` + (o.placeholder ? '' : '<div class="rate"><span class="s">&#9733;&#9733;&#9733;&#9733;&#9733;</span><b>4.8</b><span>&mdash; 20,000+ Happy Customers</span></div>');
+  $('#headM').innerHTML = head; $('#headD').innerHTML = head;
+  $('#sub').textContent = o.sub || (o.copy || []).join(' ');
+  $('#ben').innerHTML = (o.benefits || []).map(b => `<li>${esc(b)}</li>`).join(''); if (!(o.benefits || []).length) $('#ben').classList.add('gone');
+  $('#ct').textContent = o.cardTitle || o.title; $('#cs').textContent = o.cardSub || '';
+  $('#cp').textContent = money(o.price); $('#cc').textContent = o.compareAt ? money(o.compareAt) : '';
+  if (o.badge) $('#badge').textContent = o.badge; else $('#badge').classList.add('gone');
+  $('#rows').innerHTML = [...(o.compareAt ? [`+ You save ${money(o.compareAt - o.price)} today`] : []), ...(o.rows || []).map(r => '+ ' + r)].map(r => `<div>${esc(r)}</div>`).join('');
+  $('#p1').textContent = money(o.price); $('#urg').textContent = o.urgency || '';
+  const ph = '<div class="ph">PLACEHOLDER IMAGE<br>' + (o.image ? 'add ' + o.image : 'Upsell 2 image TBD') + '</div>';
+  const g = o.gallery || [];
+  if (g.length) {
+    let i = 0;
+    $('#gal').innerHTML = `<div class="stage"><img id="gmain" src="${g[0]}" alt="${esc(o.title)}"><button class="arr l" id="gl" aria-label="Previous">&lsaquo;</button><button class="arr r" id="gr" aria-label="Next">&rsaquo;</button></div><div class="th">${g.map((s, n) => `<img src="${s}" class="${n ? '' : 'on'}" alt="">`).join('')}</div>`;
     $('#gmain').onerror = () => $('#gal').innerHTML = ph;
-    document.querySelectorAll('.thumbs img').forEach(im => { im.onerror = () => im.remove(); im.onclick = () => { $('#gmain').src = im.src; document.querySelectorAll('.thumbs img').forEach(x => x.classList.toggle('on', x === im)); }; });
+    const th = [...document.querySelectorAll('.th img')];
+    const show = n => { i = (n + g.length) % g.length; $('#gmain').src = g[i]; th.forEach((x, k) => x.classList.toggle('on', k === i)); };
+    th.forEach((im, n) => im.onclick = () => show(n)); $('#gl').onclick = () => show(i - 1); $('#gr').onclick = () => show(i + 1);
   } else $('#gal').innerHTML = ph;
   if (o.timer) {
-    $('#timer').classList.remove('gone'); const skew = st.now - Date.now();
+    $('#tw').classList.remove('gone'); const skew = st.now - Date.now();
     const tick = () => { const ms = st.expiresAt - (Date.now() + skew); if (ms <= 0) { kill(); return clearInterval(iv); }
       const s = Math.ceil(ms / 1000); $('#clock').textContent = `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`; };
     const iv = setInterval(tick, 250); tick();
